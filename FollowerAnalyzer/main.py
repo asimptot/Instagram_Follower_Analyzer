@@ -2,6 +2,8 @@ import pyautogui as pg
 from tkinter import *
 import time
 from mailthon import postman, email
+import os
+import subprocess
 
 pg.PAUSE=2
 
@@ -10,30 +12,21 @@ def close():
         pg.hotkey('alt', 'f4')
 
 def open_browser():
-    pg.press('win')
-    pg.typewrite('chrome.exe')
     time.sleep(2)
-    pg.press('enter')
+    subprocess.Popen('C:\Program Files (x86)\Google\Chrome\Application\chrome.exe')
     time.sleep(2)
     pg.hotkey('ctrl', 'up', 'N')
-    pg.typewrite("https://www.instagram.com/explore/")
+    pg.typewrite("https://www.instagram.com/explore/people/suggested/")
     pg.press('enter')
     time.sleep(10)
 
 def Analiz():
     id = giris1.get()
     password = giris2.get()
-    time.sleep(2)
-    pg.press('win')
-    time.sleep(2)
-    pg.typewrite('cmd')
-    time.sleep(2)
-    pg.press('enter')
-    pg.typewrite('cd\\')
-    pg.press('enter')
-    pg.typewrite('cd C:\FollowerAnalyzer\Analysis')
-    pg.press('enter')
-    pg.typewrite('python analysis.py -n 250 -d 60 '+id+' '+password)
+    os.system('D:')
+    os.chdir(r'D:\Projects\Sosyal\Instagram\FollowerAnalyzer\Analysis')
+    os.system('python analysis.py -n 250 -d 60 '+id+' '+password)
+    print(os.getcwd())
     pg.press('enter')
     time.sleep(60)
 
@@ -47,32 +40,16 @@ def Analiz():
 
     assert r.ok
 
-    #time.sleep(30)
-
-#    f = open("analysis.txt", "r+")
-#    if f.mode == 'r':
-#        contents = f.read()
-#        print(contents)
-
-
 
 def Unfollow():
     id = giris1.get()
     password = giris2.get()
     time.sleep(2)
-    pg.press('win')
-    time.sleep(2)
-    pg.typewrite('cmd')
-    time.sleep(2)
-    pg.press('enter')
-    time.sleep(2)
-    pg.typewrite('cd\\')
-    pg.press('enter')
-    pg.typewrite('cd C:\FollowerAnalyzer\\Unfollow')
-    pg.press('enter')
+    os.system('D:')
+    os.chdir(r'D:\Projects\Sosyal\Instagram\FollowerAnalyzer\Unfollow')
+    os.system('python unfollow.py -n 250 -d 60 '+id+' '+password)
+    print(os.getcwd())
 
-    pg.typewrite('python unfollow.py -n 250 -d 60 '+id+' '+password)
-#
     pg.press('enter')
     time.sleep(10)
 
@@ -99,11 +76,15 @@ def Kesfet():
     pg.typewrite(id)
     pg.press('tab')
     pg.typewrite(password)
+
     for i in range(2):
         pg.press('tab')
     pg.press('enter')
 
     time.sleep(5)
+
+    pg.press('tab')
+    pg.press('enter')
 
     p = postman(host='smtp.gmail.com', auth=('formaretro', '10061144'))
     r = p.send(email(
@@ -115,7 +96,7 @@ def Kesfet():
 
     assert r.ok
 
-    for i in range(5):
+    for i in range(4):
         pg.press('tab')
         time.sleep(0.25)
     pg.press('enter')
