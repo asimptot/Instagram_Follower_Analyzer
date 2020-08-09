@@ -76,7 +76,7 @@ class InstagramScraper:
             time_difference = datetime.now() - datetime.fromtimestamp(int(results[0]['taken_at_timestamp']))
             #print('{:<25s} posted {:>12s} ago'.format(profile, str(time_difference)))
 
-            if time_difference.days>150:
+            if time_difference.days>365:
                 #print('{:<25s}'.format(profile, str(time_difference)))
                 return '@ {:<25s}\n'.format(profile, str(time_difference))
         except:
