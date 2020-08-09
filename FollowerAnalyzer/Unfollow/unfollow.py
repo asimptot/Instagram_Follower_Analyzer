@@ -1,5 +1,4 @@
 import argparse
-import random
 import sys
 import time
 
@@ -75,5 +74,6 @@ if __name__ == '__main__':
         ig.getUsernameInfo(str(_))
         print('  - unfollowing user {}'.format(ig.LastJson['user']['username']))
         ig.unfollow(str(_))
-        time.sleep(random.uniform(1, args.max_delay))
+        #time.sleep(random.uniform(1, args.max_delay))
+        time.sleep(5)
 
